@@ -7,7 +7,7 @@
 
 <!-- # <p style="text-align: center;">ApexDevs</p> -->
 
-####+<p style="text-align: center;">For Developers By Developers</p>  
+<p style="text-align: center;">For Developers By Developers</p>  
 
 <br>
 
