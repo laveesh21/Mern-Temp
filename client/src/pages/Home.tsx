@@ -1,9 +1,10 @@
+import ProjectCard from "../components/ProjectCard"
 
 
 function Home() {
   return (
     <div>
-      Home
+      <ProjectCard/>
     </div>
   )
 }
