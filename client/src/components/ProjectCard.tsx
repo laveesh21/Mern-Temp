@@ -4,7 +4,7 @@ interface ProjectData {
   name: string;
   dev: string;
   about: string;
-  image: string;
+  imageList: string[];
   tags: string[];
   date: string;
   likes: string;
@@ -50,7 +50,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
       </div>
 
       {/* IMAGE */}
-      <img src={data.image} alt="Project Logo" className="bg-zinc-500 w-full h-60" />
+      <img src={data.imageList[0]} alt="Project Logo" className="bg-zinc-500 w-full h-60" />
 
       {/* PROJECT DETAILS */}
       <div className="p-2">

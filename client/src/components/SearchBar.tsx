@@ -25,13 +25,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, searchTerm }) => {
           // value={searchTerm}
           onChange={handleInputChange}
           placeholder="Search"
-          className="px-4 h-10 w-80 border border-r-black border-white"
+          className="px-4 h-10 w-80 border-white bg-gray-800"
         />
         {searchTerm && (
           <button
             type="button"
             onClick={handleClearClick}
-            className="text-gray-400 hover:text-gray-600"
+            className="text-gray-400 hover:text-gray-600 px-2"
           >
             <svg
               className="w-4 h-4"

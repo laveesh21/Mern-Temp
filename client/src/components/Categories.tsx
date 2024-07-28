@@ -33,7 +33,7 @@ const Categories: React.FC<CategoryProps> = ({ onSelectCategory, onResetCategory
 
   return (
     <div className="">
-      <button onClick={handleViewAll} className={`py-3 w-full bg-zinc-900 mb-2 font-bold text=`}>Reset</button>
+      <button onClick={handleViewAll} className={`py-3 w-full bg-zinc-900 mb-2 font-bold text-lg`}>Reset</button>
 
       <div className="grid grid-cols-2 gap-2">
         {categories.map((category, index) => (

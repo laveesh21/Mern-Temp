@@ -4,6 +4,7 @@ import ProjectCard from "../components/ProjectCard";
 import { useState } from "react";
 import NotFound from "../components/NotFound";
 import Categories from "../components/Categories";
+import { Link } from "react-router-dom";
 
 function Home() {
 
@@ -37,11 +38,9 @@ function Home() {
           <SearchBar searchTerm={searchTerm} onSearch={handleSearch} />
           <div className="flex flex-col mt-10">
             <h2 className="my-6 font-semibold text-xl">Categories:</h2>
-
             <Categories onSelectCategory={handleCategorySelect} onResetCategory={handleCategoryReset} selectedCategory={selectedCategory} />
           </div>
         </div>
-
       </div>
 
       {/* Right Side: Project Cards */}
@@ -50,15 +49,15 @@ function Home() {
 
           {filterdDataSet.length != 0 ?
             filterdDataSet.map((data, index) => (
-              <div key={index}>
+              <Link to={`/project/${data.id}`} key={index} >
                 <ProjectCard data={data} />
-              </div>
+              </Link>
             ))
             : <div className=""><NotFound /></div>}
 
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
