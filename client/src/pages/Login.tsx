@@ -30,7 +30,7 @@ const LogIn: React.FC = () => {
 
   return (
     <div className="min-w-[90%] flex justify-center items-center min-h-[80vh] bg-cover bg-center text-white">
-      <div className="w-[420px] p-8 rounded-lg bg-transparent border-2 border-gray-200 backdrop-blur-lg">
+      <div className="w-[420px] p-8 rounded-lg bg-zinc-900 shadow-white-soft">
         <h1 className="text-center text-3xl font-extrabold">Log in</h1>
         <form onSubmit={handleSubmit}>
           <div className="relative w-full h-[50px] my-6">
@@ -38,7 +38,7 @@ const LogIn: React.FC = () => {
               type="text"
               name="username"
               placeholder="Username"
-              className="w-full h-full p-5 rounded-full bg-transparent text-white border-3 border-[rgba(177,177,177,0.2)] placeholder-[rgba(14,14,14,0.589)] focus:border-white"
+              className="w-full h-full p-5 rounded-full bg-transparent text-white border-2 border-gray-400 placeholder-gray-400 focus:border-white"
               id="usernameInput"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -51,7 +51,7 @@ const LogIn: React.FC = () => {
               type="password"
               name="password"
               placeholder="Password"
-              className="w-full h-full p-5 rounded-full bg-transparent text-white border-3 border-[rgba(177,177,177,0.2)] placeholder-[rgba(14,14,14,0.589)] focus:border-white"
+              className="w-full h-full p-5 rounded-full bg-transparent text-white border-2 border-gray-400 placeholder-gray-400 focus:border-white"
               id="userpassInput"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -65,7 +65,7 @@ const LogIn: React.FC = () => {
               <input
                 type="checkbox"
                 id="rememberMe"
-                className="mr-2 accent-[#00BF62] scale-125"
+                className="mr-2 accent-green-600 scale-125"
               />
               Remember me
             </label>
@@ -76,14 +76,14 @@ const LogIn: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full h-[45px] rounded-full bg-[#00BF62] text-black text-lg font-semibold shadow-md hover:bg-[#00a74a]"
+            className="w-full h-[45px] rounded-full bg-green-600 text-black text-lg font-semibold shadow-md hover:bg-green-700"
           >
             Login
           </button>
 
           <div className="text-center text-sm mt-5">
             Don't have an account?{" "}
-            <Link to="/auth/sign_up" className="font-medium text-[#00BF62] hover:underline">
+            <Link to="/auth/sign_up" className="font-medium text-green-600 hover:underline">
               Register
             </Link>
           </div>

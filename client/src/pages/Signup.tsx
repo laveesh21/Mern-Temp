@@ -1,7 +1,9 @@
 import React, { useState, FormEvent } from 'react';
 import axios from 'axios'; // Import axios for making API requests
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
+const inputBorder = "w-full p-2 px-5 rounded-full bg-transparent border-2 border-gray-400 text-white placeholder-gray-400 focus:border-gray-400 focus:outline-none";
+  
 const SignUp: React.FC = () => {
   const domain = import.meta.env.VITE_REACT_APP_DOMAIN as string;
   const [username, setUsername] = useState<string>('');
@@ -36,16 +38,19 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div className="w-full flex justify-center items-center min-h-[80vh] text-white bg-cover bg-center">
-      <div className="w-[420px] p-8 rounded-lg bg-transparent border-2 border-[#4d4d4d] backdrop-blur-md">
-        <h1 className="text-center text-3xl">Sign Up</h1>
+    <div className="flex justify-center my-36 text-white">
+      <div className="w-[600px] p-8 rounded-lg bg-zinc-900 shadow-white-soft">
+        <h1 className="text-center text-3xl font-extrabold mb-6">Sign Up</h1>
 
-        <form onSubmit={handleSubmit}>
-          <div className="relative w-full h-[50px] my-6">
-            <label htmlFor="username" className="ml-5">Username:</label>
+        <form onSubmit={handleSubmit} className="space-y-4">
+
+          <div className='flex justify-between gap-5'>
+
+          <div className="">
+            <label htmlFor="username" className="ml-3 text-sm">Username:</label>
             <input
               type="text"
-              className="w-full h-full p-5 rounded-full bg-transparent border-3 border-[rgba(177,177,177,0.2)] text-white placeholder-[rgba(255,255,255,0.589)] focus:border-white"
+              className={`${inputBorder}`}
               name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -53,23 +58,24 @@ const SignUp: React.FC = () => {
             />
           </div>
 
-          <div className="relative w-full h-[50px] my-6">
-            <label htmlFor="fullname" className="ml-5">Full Name:</label>
+          <div className="">
+            <label htmlFor="fullname" className="ml-3 text-sm">Full Name:</label>
             <input
               type="text"
-              className="w-full h-full p-5 rounded-full bg-transparent border-3 border-[rgba(177,177,177,0.2)] text-white placeholder-[rgba(255,255,255,0.589)] focus:border-white"
+              className={`${inputBorder}`}
               name="fullname"
               value={fullname}
               onChange={(e) => setFullname(e.target.value)}
               required
             />
           </div>
+          </div>
 
-          <div className="relative w-full h-[50px] my-6">
-            <label htmlFor="email" className="ml-5">Email ID:</label>
+          <div className="flex flex-col space-y-1">
+            <label htmlFor="email" className="ml-3 text-sm">Email ID:</label>
             <input
               type="email"
-              className="w-full h-full p-5 rounded-full bg-transparent border-3 border-[rgba(177,177,177,0.2)] text-white placeholder-[rgba(255,255,255,0.589)] focus:border-white"
+              className={`${inputBorder}`}
               id="emailInput"
               name="email"
               value={email}
@@ -78,11 +84,11 @@ const SignUp: React.FC = () => {
             />
           </div>
 
-          <div className="relative w-full h-[50px] my-6">
-            <label htmlFor="password" className="ml-5">Password:</label>
+          <div className="flex flex-col space-y-1">
+            <label htmlFor="password" className="ml-3 text-sm">Password:</label>
             <input
               type="password"
-              className="w-full h-full p-5 rounded-full bg-transparent border-3 border-[rgba(177,177,177,0.2)] text-white placeholder-[rgba(255,255,255,0.589)] focus:border-white"
+              className={`${inputBorder}`}
               id="passwordInput"
               name="password"
               value={password}
@@ -91,27 +97,35 @@ const SignUp: React.FC = () => {
             />
           </div>
 
-          <div className="my-8">
-            <label htmlFor="agreement" className="flex items-center">
-              <input
-                type="checkbox"
-                id="agreement"
-                name="agreement"
-                checked={agreement}
-                onChange={(e) => setAgreement(e.target.checked)}
-                className="mr-2"
-                required
-              />
-              I agree to the <a href="https://google.com" className="text-white underline">terms and conditions.</a>
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="agreement"
+              name="agreement"
+              checked={agreement}
+              onChange={(e) => setAgreement(e.target.checked)}
+              className="accent-green-600 scale-125"
+              required
+            />
+            <label htmlFor="agreement" className='text-sm'>
+              I agree to the <a href="https://google.com" className="text-sm text-green-600 hover:underline">terms and conditions.</a>
             </label>
           </div>
 
-          <button
-            className="w-full h-[45px] rounded-full bg-[#00BF62] text-black text-lg font-semibold shadow-md hover:bg-[#00a74a] focus:outline-none"
-            type="submit"
-          >
-            Sign Up
+          <div className='w-full text-center'>          
+            <button
+            className="w-1/2 py-2 text-white rounded-full bg-green-600 text-black text-lg font-semibold shadow-md hover:bg-green-700 focus:outline-none"
+            type="submit">
+              Sign Up
           </button>
+          </div>
+          <div className="text-center text-sm mt-5">
+            Alredy have an account?{" "}
+            <Link to="/auth/log_in" className="font-medium text-green-600 hover:underline">
+              Login
+            </Link>
+          </div>
+
         </form>
       </div>
     </div>
@@ -119,4 +133,3 @@ const SignUp: React.FC = () => {
 }
 
 export default SignUp;
-

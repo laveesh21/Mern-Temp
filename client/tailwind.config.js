@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        'white-soft': '0 -2px 4px rgba(255, 255, 255, 0.2), 0 8px 12px rgba(255, 255, 255, 0.15)',
+      },
       width: {
         '108': '27rem',   // 27rem (432px)
         '116': '29rem',   // 29rem (464px)

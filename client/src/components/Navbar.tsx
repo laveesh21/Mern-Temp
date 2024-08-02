@@ -10,6 +10,7 @@ function Navbar() {
         <div className="text-2xl text-white font-bold">APEX</div>
         <div className="text-2xl text-green-500 font-bold">DEVS</div>
       </div>
+
       <div className="" id="navbar">
         <ul className="flex gap-6 text-white">
           <li className="hover:text-green-500 transition duration-300">
@@ -20,6 +21,7 @@ function Navbar() {
           </li>
         </ul>
       </div>
+
       <div className="" id="profile">
         <Link to="/profile">
           <div className="text-white hover:text-green-500 transition duration-300">
@@ -27,9 +29,9 @@ function Navbar() {
           </div>
         </Link>
       </div>
-      <div className=''>
-
-      </div>
+      {/* <div className=''> */}
+      {/**/}
+      {/* </div> */}
     </div >
   );
 }
