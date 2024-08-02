@@ -14,6 +14,7 @@ export default {
         '136': '34rem',
         '144': '36rem',   // 36rem (576px)
         '160': '40rem',   // 40rem (640px)
+        '168': '42rem',
         '176': '44rem',
       },
       height: {

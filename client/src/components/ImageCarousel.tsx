@@ -15,16 +15,17 @@ const ImageCarousel: React.FC<CarouselProps> = ({ images }) => {
 
   // Functions to move to the Previous / Next set of images
   const prevSlide = () => {
-    setCurrentIndex(prevIndex => {
-      const newIndex = prevIndex === 0 ? images.length - imagesToShow : prevIndex - 1;
+    setCurrentImageIndex(prevIndex => {
+      const newIndex = prevIndex === 0 ? images.length - 1 : prevIndex - 1;
+      setCurrentIndex(Math.floor(newIndex / imagesToShow));
       return newIndex;
     });
   };
 
   const nextSlide = () => {
-    setCurrentIndex(prevIndex => {
-      const maxIndex = images.length - imagesToShow;
-      const newIndex = prevIndex >= maxIndex ? 0 : prevIndex + 1;
+    setCurrentImageIndex(prevIndex => {
+      const newIndex = prevIndex === images.length - 1 ? 0 : prevIndex + 1;
+      setCurrentIndex(Math.floor(newIndex / imagesToShow));
       return newIndex;
     });
   };
@@ -32,19 +33,19 @@ const ImageCarousel: React.FC<CarouselProps> = ({ images }) => {
   // Function to select image
   const selectImage = (index: number) => {
     setCurrentImageIndex(index);
+    setCurrentIndex(Math.floor(index / imagesToShow));
   };
 
   // Calculate the width of the scroll indicator based on current index
-  const scrollIndicatorWidth = `${(currentIndex / (images.length * imageWidth - containerWidth)) * 1100}%`;
+  const scrollIndicatorWidth = `${((currentImageIndex + 1) / images.length) * 100}%`;
 
   return (
     <div>
       {/* Current Image */}
       <div className='w-full mb-2 h-96' style={{ backgroundImage: `url(${images[currentImageIndex]})`, backgroundSize: 'cover' }}></div>
-
       {/* Image Carousel Container */}
       <div className="overflow-hidden" style={{ width: `${containerWidth}rem` }}>
-        <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentIndex * imageWidth}rem)`, width: `${images.length * imageWidth}rem` }}>
+        <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentIndex * containerWidth}rem)`, width: `${images.length * imageWidth}rem` }}>
           {/* Render each image */}
           {images.map((image, index) => (
             <div
@@ -63,8 +64,8 @@ const ImageCarousel: React.FC<CarouselProps> = ({ images }) => {
         <button onClick={prevSlide} className="bg-green-600 h-max w-14 rounded-sm">&#10094;</button>
         {/* Scroll Indicator */}
         <div className="relative flex-1 mx-4">
-          <div className=" absolute inset-0 bg-gray-600 rounded-full" style={{ height: '0.25rem' }} />
-          <div className="absolute inset-0 bg-gray-300 rounded-full max-w-full" style={{ width: scrollIndicatorWidth, height: '0.25rem' }} />
+          <div className="absolute inset-0 bg-gray-600 rounded-full" style={{ height: '0.25rem' }} />
+          <div className="absolute inset-0 bg-gray-300 rounded-full" style={{ width: scrollIndicatorWidth, height: '0.25rem' }} />
         </div>
         {/* Next Slide Button */}
         <button onClick={nextSlide} className="bg-green-600 h-6 w-14 rounded-sm">&#10095;</button>

@@ -16,16 +16,14 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
 }
-
+/* 
 a {
-  /* font-weight: 400; */
   color: #ffffff;
-  /* text-decoration: inherit; */
 }
 
 a:hover {
   color: #22C55E;
-}
+} */
 
 body {
   margin: 0;
