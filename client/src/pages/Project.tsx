@@ -13,7 +13,7 @@ const Project: React.FC = () => {
 
   const rating = 70;
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-auto bg-gray-950">
+    <div className="mb-96 flex flex-col items-center justify-center bg-zinc-950">
       <div className="mt-16 w-auto h-auto">
         {/* PROJECT CONTAINER */}
         <div className="h-auto w-auto">

@@ -14,17 +14,20 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />om
-        <Route path='/about' element={<About />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/project/:id' element={<Project />} />
-        <Route path='/auth/log_in' element={<LogIn />} />
-        <Route path='/auth/sign_up' element={<SignUp />} />
-
-      </Routes>
-      <Footer></Footer>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/project/:id" element={<Project />} />
+            <Route path="/auth/log_in" element={<LogIn />} />
+            <Route path="/auth/sign_up" element={<SignUp />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
   )
 }
