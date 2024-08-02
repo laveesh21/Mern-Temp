@@ -22,10 +22,15 @@ function Navbar() {
         </ul>
       </div>
 
-      <div className="" id="profile">
+      <div className="flex gap-3" id="profile">
         <Link to="/profile">
           <div className="text-white hover:text-green-500 transition duration-300">
             Profile
+          </div>
+        </Link>
+        <Link to="/auth/log_in">
+          <div className="text-white hover:text-green-500 transition duration-300">
+            Login
           </div>
         </Link>
       </div>
