@@ -1,14 +1,21 @@
-import React, { useRef, useState } from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 
-interface ProjectData {
+export interface ProjectData {
+  _id: number;
   name: string;
-  dev: string;
+  developer: string;
   about: string;
+  desc: string;
   imageList: string[];
   tags: string[];
   date: string;
   likes: string;
   dislikes: string;
+  status?: string;
+  releaseDate?: string;
+  techStack?: string[];
+  thumbnail: string;
 }
 
 interface ProjectCardProps {
@@ -16,8 +23,19 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
+
+  const domain = import.meta.env.VITE_REACT_APP_DOMAIN as string;
   const listRef = useRef<HTMLUListElement | null>(null);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [developerName, setdeveloperName] = useState<string>("");
+
+  useEffect(() => {
+    async function fetchDev() {
+      const response = await axios.get(`${domain}/profile/${data.developer}`)
+      setdeveloperName(response.data.username)
+    }
+    fetchDev()
+  }, [])
 
   const scrollLeft = () => {
     if (listRef.current) {
@@ -39,7 +57,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
     <div className="border border-gray-400 w-96 relative rounded-sm">
       {/* DEVELOPER */}
       <div className="p-2 px-4 flex justify-between items-center">
-        <p className="font-extrabold text-gray-200">{data.dev}</p>
+        <p className="font-extrabold text-gray-200">{developerName}</p>
         <div className="focus:outline-none" onClick={toggleBookmark}>
           {isBookmarked ? (
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAADLSURBVEhLY2SgMWCksfkMWC1QOZzg8I/pfzwDw38HYhzwn/H/g/+MzIkPLBc8QFeP1QKlo/HzgYYnEGM4TA3QkgP3rRY7EmlB3H9SDIepvWe9CMPBOHwwagEigEeDCCWxjaYignlvNIhoH0SgEpPxPxOwSMZe0lIUB0z/mBzv2C44APKG8tHYhP8MjPVApgKyt8iyAFc5r3A8QYHp33+gJQjfkGwBsqtxRQCyb4i2QPFY7H5stRMuS2C+uWe9MJGoGo1gciFBAc1bFQCNe4AZF5C7aAAAAABJRU5ErkJggg==" />

@@ -1,5 +1,4 @@
 import SearchBar from "../components/SearchBar";
-import { dataSet, ProjectData } from "./tempData";
 import ProjectCard from "../components/ProjectCard";
 import { useEffect, useState } from "react";
 import NotFound from "../components/NotFound";
@@ -7,13 +6,38 @@ import Categories from "../components/Categories";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+
+
+// import { dataSet, ProjectData } from "./tempData";
+
+export interface ProjectData {
+  _id: number;
+  name: string;
+  developer: string;
+  about: string;
+  desc: string;
+  imageList: string[];
+  tags: string[];
+  date: string;
+  likes: string;
+  dislikes: string;
+  status?: string;
+  releaseDate?: string;
+  techStack?: string[];
+  thumbnail: string;
+}
+
+
+
+
 function Home() {
 
   const domain = import.meta.env.VITE_REACT_APP_DOMAIN as string;
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [projectData, setProjectData] = useState<any>([])
+  const [projectData, setProjectData] = useState<any[]>([])
   const [loading, setLoading] = useState<Boolean>(false)
+  const [filteredData, setFilteredData] = useState<ProjectData[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,7 +45,7 @@ function Home() {
         setLoading(true)
         const response = await axios.get(`${domain}/project/`)
         setProjectData(response.data)
-        console.log(projectData)
+        console.log(projectData); // Ensure data is an array
         setLoading(false)
       } catch (error) {
         console.log("ERROR WHILE FETCHING PROJECT DATA")
@@ -43,12 +67,19 @@ function Home() {
     setSelectedCategory("");
   };
 
-  const filterdDataSet: ProjectData[] = dataSet.filter((project) => {
-    const matchSearch = project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.tags.some((tag: string) => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-    const matchCategory = project.tags.some((tag: string) => tag.toLowerCase().includes(selectedCategory.toLowerCase()))
-    return matchSearch && matchCategory
-  })
+  useEffect(() => {
+    function filterFunction() {
+      var filterdDataSet: ProjectData[] = projectData.filter((project) => {
+        const matchSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          project.tags.some((tag: string) => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+        const matchCategory = project.tags.some((tag: string) => tag.toLowerCase().includes(selectedCategory.toLowerCase()))
+        return matchSearch && matchCategory
+      })
+      setFilteredData(filterdDataSet)
+    }
+    filterFunction()
+  }, [projectData, searchTerm, selectedCategory])
+
 
   return (
     <div className="flex h-auto min-h-screen">
@@ -77,9 +108,9 @@ function Home() {
 
         <div className="flex w-11/12 flex-wrap justify-evenly items-center gap-8">
 
-          {filterdDataSet.length != 0 ?
-            filterdDataSet.map((data, index) => (
-              <Link to={`/project/${data.id}`} key={index} >
+          {filteredData.length != 0 ?
+            filteredData.map((data, index) => (
+              <Link to={`/project/${data._id}`} key={index} >
                 <ProjectCard data={data} />
               </Link>
             ))

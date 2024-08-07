@@ -13,7 +13,7 @@ const NotFound: React.FC = () => {
 
       {/* Message */}
       <p className="text-xl font-semibold">
-        No projects match the keyword. Please try a different search.
+        No projects Found !
       </p>
     </div>
   );

@@ -4,7 +4,7 @@ import Demon from '../assets/demon.png';
 import Anime from '../assets/anime.png';
 
 export interface ProjectData {
-  id: number;
+  _id: number;
   name: string;
   dev: string;
   about: string;
@@ -22,7 +22,7 @@ export interface ProjectData {
 
 export const dataSet: ProjectData[] = [
   {
-    id: 1,
+    _id: 1,
     name: "Project One",
     dev: "SuperKnox",
     about: "This is a brief description about Project One. Build with react + nodejs for a rhobust backend . To view all anime ranking . Sample text description is being written here ",
@@ -38,7 +38,7 @@ export const dataSet: ProjectData[] = [
     thumbnail: Luffy
   },
   {
-    id: 2,
+    _id: 2,
     name: "E-commerce Platform",
     dev: "TechSavvy",
     about: "Building a scalable e-commerce platform with modern technologies.",
@@ -54,7 +54,7 @@ export const dataSet: ProjectData[] = [
     thumbnail: Ka
   },
   {
-    id: 3,
+    _id: 3,
     name: "Social Media App",
     dev: "CodeMaster",
     about: "A social media application that connects people from around the world.",
@@ -70,7 +70,7 @@ export const dataSet: ProjectData[] = [
     thumbnail: Demon
   },
   {
-    id: 4,
+    _id: 4,
     name: "Fitness Tracker",
     dev: "FitDev",
     about: "An app to track fitness activities and monitor health metrics.",
@@ -86,7 +86,7 @@ export const dataSet: ProjectData[] = [
     thumbnail: Luffy
   },
   {
-    id: 5,
+    _id: 5,
     name: "AI Chatbot",
     dev: "AI Guru",
     about: "Developing an AI-powered chatbot for customer support.",
@@ -102,7 +102,7 @@ export const dataSet: ProjectData[] = [
     thumbnail: Demon
   },
   {
-    id: 6,
+    _id: 6,
     name: "Travel Booking Website",
     dev: "GlobeTrotter",
     about: "A website for booking travel packages and exploring destinations.",
@@ -118,7 +118,7 @@ export const dataSet: ProjectData[] = [
     thumbnail: Ka
   },
   {
-    id: 7,
+    _id: 7,
     name: "Music Streaming Service",
     dev: "MusicLover",
     about: "A platform for streaming and discovering new music.",
@@ -134,7 +134,7 @@ export const dataSet: ProjectData[] = [
     thumbnail: Luffy
   },
   {
-    id: 8,
+    _id: 8,
     name: "Online Learning Portal",
     dev: "EduTech",
     about: "An online platform for learning new skills and courses.",
