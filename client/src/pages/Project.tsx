@@ -5,6 +5,7 @@ import ImageCarousel from "../components/ImageCarousel";
 
 const Project: React.FC = () => {
   const { id } = useParams();
+
   const project = dataSet.find((p) => p.id === parseInt(id));
 
   if (!project) {
@@ -18,11 +19,19 @@ const Project: React.FC = () => {
         {/* PROJECT CONTAINER */}
         <div className="h-auto w-auto">
           <h1 className="p-2 w-full h-auto mb-2 text-3xl">{project.name}</h1>
+
+
           <div className="w-auto h-auto flex">
+
+
+
+
             {/* Left: Image Carousel */}
             <div className="w-176 h-auto">
               <ImageCarousel images={project.imageList}></ImageCarousel>
             </div>
+
+
 
             {/* Right: Project Details */}
             <div className="px-4 w-80 flex-grow bg-gray-900   ">
@@ -69,6 +78,11 @@ const Project: React.FC = () => {
               </div>
 
 
+
+
+
+
+
             </div>
           </div>
         </div>
@@ -83,6 +97,12 @@ const Project: React.FC = () => {
             Bookmark
           </button>
         </div>
+
+
+
+
+
+
 
         {/* PROJECT DETAILS CONTAINER */}
         <div className="w-full h-96 flex gap-2">

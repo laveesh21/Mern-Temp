@@ -3,7 +3,7 @@ import axios from 'axios'; // Import axios for making API requests
 import { Link, useNavigate } from 'react-router-dom';
 
 const inputBorder = "w-full p-2 px-5 rounded-full bg-transparent border-2 border-gray-400 text-white placeholder-gray-400 focus:border-gray-400 focus:outline-none";
-  
+
 const SignUp: React.FC = () => {
   const domain = import.meta.env.VITE_REACT_APP_DOMAIN as string;
   const [username, setUsername] = useState<string>('');
@@ -46,29 +46,29 @@ const SignUp: React.FC = () => {
 
           <div className='flex justify-between gap-5'>
 
-          <div className="">
-            <label htmlFor="username" className="ml-3 text-sm">Username:</label>
-            <input
-              type="text"
-              className={`${inputBorder}`}
-              name="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
+            <div className="">
+              <label htmlFor="username" className="ml-3 text-sm">Username:</label>
+              <input
+                type="text"
+                className={`${inputBorder}`}
+                name="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
 
-          <div className="">
-            <label htmlFor="fullname" className="ml-3 text-sm">Full Name:</label>
-            <input
-              type="text"
-              className={`${inputBorder}`}
-              name="fullname"
-              value={fullname}
-              onChange={(e) => setFullname(e.target.value)}
-              required
-            />
-          </div>
+            <div className="">
+              <label htmlFor="fullname" className="ml-3 text-sm">Full Name:</label>
+              <input
+                type="text"
+                className={`${inputBorder}`}
+                name="fullname"
+                value={fullname}
+                onChange={(e) => setFullname(e.target.value)}
+                required
+              />
+            </div>
           </div>
 
           <div className="flex flex-col space-y-1">
@@ -112,12 +112,12 @@ const SignUp: React.FC = () => {
             </label>
           </div>
 
-          <div className='w-full text-center'>          
+          <div className='w-full text-center'>
             <button
-            className="w-1/2 py-2 text-white rounded-full bg-green-600 text-black text-lg font-semibold shadow-md hover:bg-green-700 focus:outline-none"
-            type="submit">
+              className="w-1/2 py-2 text-white rounded-full bg-green-600 text-lg font-semibold shadow-md hover:bg-green-700 focus:outline-none"
+              type="submit">
               Sign Up
-          </button>
+            </button>
           </div>
           <div className="text-center text-sm mt-5">
             Alredy have an account?{" "}
