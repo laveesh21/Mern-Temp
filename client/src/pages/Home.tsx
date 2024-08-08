@@ -5,6 +5,7 @@ import NotFound from "../components/NotFound";
 import Categories from "../components/Categories";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Loading from "../components/Loading";
 
 
 
@@ -89,6 +90,7 @@ function Home() {
       {/* Left Side: Search Bar */}
       <div className="w-1/4 pt-10">
         <div className="flex flex-col justify-center items-center">
+
           <SearchBar searchTerm={searchTerm} onSearch={handleSearch} />
           <div className="flex flex-col mt-10">
             <h2 className="my-6 font-semibold text-xl">Categories:</h2>
@@ -105,6 +107,7 @@ function Home() {
 
         {/* LODING SCREEN NEED TO BE MADE */}
         {loading && <div>Loading ...</div>}
+
 
         <div className="flex w-11/12 flex-wrap justify-evenly items-center gap-8">
 
