@@ -1,4 +1,4 @@
-import './App.css'   
+import './App.css'
 import Navbar from './components/Navbar';
 import About from './pages/About';
 import Home from './pages/Home'
@@ -21,7 +21,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/*" element={<Profile />} />
             <Route path="/project/:id" element={<Project />} />
             <Route path="/auth/log_in" element={<LogIn />} />
             <Route path="/auth/sign_up" element={<SignUp />} />
