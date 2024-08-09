@@ -161,7 +161,7 @@ const ProjectUpload: React.FC = () => {
           ></textarea>
 
 
-          <label htmlFor="imageLink" className="block text-white mb-2 flex justify-between items-end"><span className="">Project Images</span><span className="text-xs text-gray-400">*atleast 1 image is required</span></label>
+          <label htmlFor="imageLink" className="text-white mb-2 flex justify-between items-end"><span className="">Project Images</span><span className="text-xs text-gray-400">*atleast 1 image is required</span></label>
           <CloudinaryImageUpload
             imageUrl={imageUrl}
             setImageUrl={handleImageUrlChange}

@@ -5,13 +5,8 @@ import NotFound from "../components/NotFound";
 import Categories from "../components/Categories";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Loading from "../components/Loading";
 
-
-
-// import { dataSet, ProjectData } from "./tempData";
-
-export interface ProjectData {
+interface ProjectData {
   _id: number;
   name: string;
   developer: string;
@@ -46,7 +41,6 @@ function Home() {
         setLoading(true)
         const response = await axios.get(`${domain}/project/`)
         setProjectData(response.data)
-        console.log(projectData); // Ensure data is an array
         setLoading(false)
       } catch (error) {
         console.log("ERROR WHILE FETCHING PROJECT DATA")

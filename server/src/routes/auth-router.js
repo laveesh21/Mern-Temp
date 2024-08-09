@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
     // Generate access token
     // const token = await user.generateAccessToken();
 
-//temp
+    //temp
     const token = jwt.sign(
       {
         _id: user._id,
@@ -48,7 +48,7 @@ router.post('/login', async (req, res) => {
       },
       'tempSecretKey',
       {
-        expiresIn: 100000
+        expiresIn: 10000000
       }
     );
 

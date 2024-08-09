@@ -38,7 +38,7 @@ const userSchema = new Schema(
       type: Boolean,
     },
 
-    bio: {
+    summary: {
       type: String,
     },
 
@@ -117,7 +117,7 @@ userSchema.methods.generateRefreshToken = async function() {
     }
   );
   return token;
-}; 
+};
 
 
 const User = mongoose.model("User", userSchema);
