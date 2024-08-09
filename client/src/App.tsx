@@ -9,6 +9,7 @@ import ProjectUpload from './pages/ProjectUpload';
 import Footer from './components/Footer';
 import LogIn from './pages/Login';
 import SignUp from './pages/Signup';
+import EditProfile from './pages/EditProfile';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/profile/*" element={<Profile />} />
+            <Route path="/profile/:id/edit/*" element={<EditProfile />} />
             <Route path="/project/:id" element={<Project />} />
             <Route path="/auth/log_in" element={<LogIn />} />
             <Route path="/auth/sign_up" element={<SignUp />} />

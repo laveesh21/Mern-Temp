@@ -1,6 +1,7 @@
 import React from 'react';
 import TempImage from '../assets/what.jpeg'; // Update with actual path
 import { User } from '../types/User.types';
+import { Link } from 'react-router-dom';
 
 interface ProfileCardProps {
   userData: User;
@@ -33,9 +34,11 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ userData }) => {
           <span className="text-xl font-bold ">Popularity</span>
           <div className="text-xl font-bold text-white bg-orange-600  rounded-full p-4 py-px">1203</div>
         </div>
-        <button className="px-4 py-1 bg-gray-700 text-white text-lg font-semibold rounded-sm hover:bg-green-600">
-          Edit Profile
-        </button>
+        <Link to={`/profile/${user._id}/edit`}>
+          <div className="px-4 py-1 bg-gray-700 text-white text-lg font-semibold rounded-sm hover:bg-green-600">
+            Edit Profile
+          </div>
+        </Link>
       </div>
     </div>
   );
