@@ -1,7 +1,23 @@
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ApexLogo from '../assets/ApexDevsLogo.png'
+import axios from 'axios';
+import { User } from '../types/User.types';
 
-function Navbar() {
+const Navbar: React.FC = () => {
+
+  const domain = import.meta.env.VITE_REACT_APP_DOMAIN as string;
+  const [user, setUser] = useState<User>({} as User)
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios.get(`${domain}/profile/user`, { headers: { 'Authorization': `Bearer ${token}` } })
+        .then(response => setUser(response.data))
+        .catch(error => console.error("ERROR AXIOS: ", error))
+    }
+  }, []);
+
   return (
     <div className="w-full h-12 bg-zinc-950 flex justify-between items-center p-4 border-b border-gray-700">
 
@@ -25,7 +41,7 @@ function Navbar() {
       </ul>
 
       <div className="flex gap-3" id="profile">
-        <Link to="/profile">
+        <Link to={`/profile/${user._id}`}>
           <div className="text-white hover:text-green-500 transition duration-300">
             Profile
           </div>

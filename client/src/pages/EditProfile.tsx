@@ -4,7 +4,7 @@ import { User } from "../types/User.types";
 import EditGeneral from "../components/EditGeneral";
 import axios from "axios";
 
-const EditProfile: React.FC<User> = () => {
+const EditProfile: React.FC = () => {
 
   const domain = import.meta.env.VITE_REACT_APP_DOMAIN as string;
   const [activeLink, setActiveLink] = useState<string>("");

@@ -34,7 +34,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ userData }) => {
           <span className="text-xl font-bold ">Popularity</span>
           <div className="text-xl font-bold text-white bg-orange-600  rounded-full p-4 py-px">1203</div>
         </div>
-        <Link to={`/profile/${user._id}/edit`}>
+        <Link to={`/profile/${user._id}/edit/general`}>
           <div className="px-4 py-1 bg-gray-700 text-white text-lg font-semibold rounded-sm hover:bg-green-600">
             Edit Profile
           </div>
