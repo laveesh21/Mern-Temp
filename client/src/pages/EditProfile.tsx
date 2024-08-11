@@ -23,20 +23,20 @@ const EditProfile: React.FC = () => {
   }, [location]);
 
   return (
-    <div className="w-full flex justify-center items-start gap-4 ">
+    <div className="w-full flex justify-center items-start gap-4 pt-20 border h-full ">
 
 
       {/* NAV LINKS FOR EDITING PROFILE */}
-      <div className="w-56 bg-gray-900 flex flex-col justify-center">
+      <div className="w-56 flex flex-col justify-center">
         <Link
           to={`/profile/${user._id}/edit/general`}
-          className={`p-2 px-4 ${activeLink.includes(`/profile/${user._id}/edit/general`) ? 'bg-gray-600' : 'bg-gray-800'}`}
+          className={`p-2 px-4 ${activeLink.includes(`/profile/${user._id}/edit/general`) ? 'bg-gray-700' : 'bg-zinc-950'}`}
           onClick={() => setActiveLink(`/profile/${user._id}/edit`)}
         >General</Link>
 
         <Link
           to={`/profile/${user._id}/edit/avatar`}
-          className={`p-2 px-4 ${activeLink.includes(`/profile/${user._id}/edit/avatar`) ? 'bg-gray-600' : 'bg-gray-800'}`}
+          className={`p-2 px-4 ${activeLink.includes(`/profile/${user._id}/edit/avatar`) ? 'bg-gray-700' : 'bg-zinc-950'}`}
           onClick={() => setActiveLink(`/profile/${user._id}/edit/avatar`)}
         >
           Avatar
@@ -44,7 +44,7 @@ const EditProfile: React.FC = () => {
 
         <Link
           to={`/profile/${user._id}/edit/security`}
-          className={`p-2 px-4 ${activeLink.includes(`/profile/${user._id}/edit/security`) ? 'bg-gray-600' : 'bg-gray-800'}`}
+          className={`p-2 px-4 ${activeLink.includes(`/profile/${user._id}/edit/security`) ? 'bg-gray-700' : 'bg-zinc-950'}`}
           onClick={() => setActiveLink(`/profile/${user._id}/edit/security`)}
         >
           Security
@@ -53,7 +53,7 @@ const EditProfile: React.FC = () => {
 
 
 
-      <div className="w-1/2 h-96 border">
+      <div className="w-1/2 h-auto">
         <Routes>
           <Route path="/general" element={<EditGeneral />} />
           {/* <Route path="avatar" element={<Avatar />} /> */}
