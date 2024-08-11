@@ -12,6 +12,7 @@ const verifyToken = (req, res, next) => {
   const token = authHeader.split(" ")[1];
 
 
+  console.log("AUTH TRIGGER")
   //NEED TO ADD .ENV SECRET KEY INSTED OF MANUAL KEY
   jwt.verify(token, 'tempSecretKey', (err, decoded) => {
     if (err) {
@@ -25,8 +26,9 @@ const verifyToken = (req, res, next) => {
       }
     }
     req.user = decoded;
-    console.log(req.user);
+    console.log(req.user)
     next();
+
   });
 };
 

@@ -14,9 +14,8 @@ const projectSchema = new Schema({
     enum: ['In-Development', 'Active', 'Deprecated'],
     default: 'In-Development'
   },
-  thumbnail: { type: String, default: "" },
-  description: { type: String, default: "" },
-  // comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
+  thumbnail: { type: String, },
+  description: { type: String, },
 }, { timestamps: true });
 
 const Project = mongoose.model("Project", projectSchema);

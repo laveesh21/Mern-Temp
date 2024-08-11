@@ -18,8 +18,8 @@ router.get(`/`, async (req, res) => {
 
 // GET REQUEST FOR A SINGLE PROJECT
 router.get(`/:projectId`, (req, res) => {
-  const _id = req.params.projectId;
-  Project.findOne({ _id })
+  const id = req.params.projectId;
+  Project.findById(id)
     .then((data) => {
       if (!data) {
         res.status(404).json({ error: "Project Does Not Exist" });
@@ -40,7 +40,7 @@ router.post(`/upload`, verifyToken, async (req, res) => {
     res.status(200).json(savedProject);
   } catch (error) {
     console.error("NODEJS => Error adding project:", error);
-    res.status(500).json({ error: "NODEJS => Internal server error" });
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 

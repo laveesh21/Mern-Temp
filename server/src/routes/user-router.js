@@ -1,9 +1,14 @@
 import { Router } from "express"
 import User from "../models/user.model.js"
 import jwt from "jsonwebtoken"
+import verifyToken from "../middleware/verifyToken.js"
 
 const router = Router()
 const secretKey = "tempSecretKey"
+
+
+
+// 1 >> GET ALL USERS
 router.get('/user', async (req, res) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (token) {
@@ -43,29 +48,26 @@ router.get('/:id', async (req, res) => {
 }
 )
 
-router.patch('/update/:id', async (req, res) => {
-  const userId = req.params.id;
-  const updatedUserData = req.body;
+
+
+// 2 >> USER PROFILE UPDATE
+router.patch('/update', verifyToken, async (req, res) => {
+  const { username, fullname, summary } = req.body
   try {
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
+    const result = await User.updateOne(
+      { _id: req.user._id },
+      { $set: { username, fullname, summary } }
+    );
 
-    const keysToUpdate = Object.keys(updatedUserData).filter(key => {
-      return updatedUserData[key] !== user[key];
-    });
+    console.log("TOKEN: ", req.user._id)
 
-    keysToUpdate.forEach(key => {
-      user[key] = updatedUserData[key];
-    });
-    const updatedUser = await user.save();
+    res.status(200).json({ message: "Updated User Successfully" });
 
-    res.json(updatedUser);
+
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("Error while upadating user")
+    res.status(500).json({ message: "Internal apex server error 500" })
   }
-});
+})
 
 export default router
