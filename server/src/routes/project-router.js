@@ -18,12 +18,15 @@ router.get(`/`, async (req, res) => {
 
 
 // GET REQUEST : FOR A SINGLE PROJECT
-router.get(`/:projectId`, (req, res) => {
+router.get('/:projectId', (req, res) => {
   const id = req.params.projectId;
+  console.log("ID: ", id);
+
   Project.findById(id)
+    .populate('developer', 'username') // Populate the developer field with the username
     .then((data) => {
       if (!data) {
-        res.status(404).json({ error: "Project Does Not Exist" });
+        return res.status(404).json({ error: "Project Does Not Exist" });
       }
       res.json(data);
     })
@@ -31,7 +34,6 @@ router.get(`/:projectId`, (req, res) => {
       res.status(500).json({ error: `NODEJS: Internal Server Error: ${error}` });
     });
 });
-
 
 //  POST REQUEST : PROJECT UPLOAD
 router.post(`/upload`, verifyToken, async (req, res) => {
