@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
-import { User } from "../types/User.types";
-import EditGeneral from "../components/EditGeneral";
+import { User } from "../../types/User.types";
+import EditGeneral from "../../components/Profile//EditGeneral";
 import axios from "axios";
 
 const EditProfile: React.FC = () => {

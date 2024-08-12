@@ -1,15 +1,15 @@
 import './App.css'
-import Navbar from './components/Navbar';
+import Navbar from './components/Layout/Navbar';
 import About from './pages/About';
 import Home from './pages/Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Profile from './pages/Profile';
-import Project from './pages/Project';
-import ProjectUpload from './pages/ProjectUpload';
-import Footer from './components/Footer';
-import LogIn from './pages/Login';
-import SignUp from './pages/Signup';
-import EditProfile from './pages/EditProfile';
+import Profile from './pages/ProfilePage/Profile';
+import Project from './pages/ProjectPage/Project';
+import ProjectUpload from './pages/ProjectPage/ProjectUpload';
+import Footer from './components/Layout/Footer';
+import LogIn from './pages/Auth/Login';
+import SignUp from './pages/Auth/Signup';
+import EditProfile from './pages/ProfilePage/EditProfile';
 
 
 function App() {

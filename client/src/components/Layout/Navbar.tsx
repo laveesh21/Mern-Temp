@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ApexLogo from '../assets/ApexDevsLogo.png'
+import ApexLogo from '../../assets/ApexDevsLogo.png'
 import axios from 'axios';
-import { User } from '../types/User.types';
+import { User } from '../../types/User.types';
 
 const Navbar: React.FC = () => {
 

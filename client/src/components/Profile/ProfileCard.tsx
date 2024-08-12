@@ -1,6 +1,6 @@
 import React from 'react';
-import TempImage from '../assets/what.jpeg'; // Update with actual path
-import { User } from '../types/User.types';
+import TempImage from '../../assets/what.jpeg'; // Update with actual path
+import { User } from '../../types/User.types';
 import { Link } from 'react-router-dom';
 
 interface ProfileCardProps {

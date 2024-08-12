@@ -3,7 +3,7 @@ import Ka from '../assets/kakarot.png';
 import Demon from '../assets/demon.png';
 import Anime from '../assets/anime.png';
 
-export interface ProjectData {
+interface ProjectData {
   _id: number;
   name: string;
   dev: string;

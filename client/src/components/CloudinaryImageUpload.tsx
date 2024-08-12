@@ -9,9 +9,9 @@ interface CloudinaryImageProps {
 
 
 const CloudinaryImageUpload: React.FC<CloudinaryImageProps> = (props) => {
+
   const cloudinaryLink = "https://api.cloudinary.com/v1_1/djkjt3zgy/image/upload";
   const cloudinaryDeleteLink = "https://api.cloudinary.com/v1_1/djkjt3zgy/image/destroy";
-
 
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<Boolean>(false);
@@ -30,9 +30,7 @@ const CloudinaryImageUpload: React.FC<CloudinaryImageProps> = (props) => {
       setLoading(true);
       setError(null);
 
-
       if (!response.ok) throw new Error('Network response was not ok.');
-
 
       const data = await response.json();
       props.setImageUrl(data.secure_url);

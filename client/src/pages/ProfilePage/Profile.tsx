@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
-import ProfileCard from "../components/ProfileCard";
-import UserProject from "../components/UserProject";
+import { User } from "../../types/User.types";
+
+import ProfileCard from "../../components/Profile/ProfileCard";
+import UserProject from "../../components/Project/UserProject";
 import axios from 'axios'
-import { User } from "../types/User.types";
+
 
 const Profile: React.FC = () => {
 

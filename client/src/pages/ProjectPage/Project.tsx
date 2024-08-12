@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { dataSet } from "./tempData";
-import ImageCarousel from "../components/ImageCarousel";
+import { dataSet } from "../tempData";
+import ImageCarousel from "../../components/Project/ImageCarousel";
 
 const Project: React.FC = () => {
   const { id } = useParams();

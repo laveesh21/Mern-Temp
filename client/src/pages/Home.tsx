@@ -1,5 +1,5 @@
 import SearchBar from "../components/SearchBar";
-import ProjectCard from "../components/ProjectCard";
+import ProjectCard from "../components/Project//ProjectCard";
 import { useEffect, useState } from "react";
 import NotFound from "../components/NotFound";
 import Categories from "../components/Categories";
@@ -8,7 +8,7 @@ import axios from "axios";
 
 interface ProjectData {
   _id: number;
-  name: string;
+  title: string;
   developer: string;
   about: string;
   desc: string;

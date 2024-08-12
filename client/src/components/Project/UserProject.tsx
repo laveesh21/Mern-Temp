@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import ProjectCard, { ProjectData } from './ProjectCard';
+import ProjectCard from './ProjectCard';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import SearchBar from './SearchBar';
+import SearchBar from '../SearchBar';
+import { ProjectData } from '../../types/Project.types';
 
 interface DecodedToken {
   _id: string;
