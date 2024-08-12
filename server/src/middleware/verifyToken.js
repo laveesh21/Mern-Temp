@@ -1,18 +1,14 @@
 import jwt from "jsonwebtoken";
 
 const verifyToken = (req, res, next) => {
-  const authHeader = req.headers["authorization"];
 
-  // console.log(authHeader);
+  const authHeader = req.headers["authorization"];
 
   if (!authHeader) {
     res.status(404).json({ message: "No Token Provided" });
   }
-
   const token = authHeader.split(" ")[1];
 
-
-  console.log("AUTH TRIGGER")
   //NEED TO ADD .ENV SECRET KEY INSTED OF MANUAL KEY
   jwt.verify(token, 'tempSecretKey', (err, decoded) => {
     if (err) {
@@ -26,7 +22,6 @@ const verifyToken = (req, res, next) => {
       }
     }
     req.user = decoded;
-    console.log(req.user)
     next();
 
   });

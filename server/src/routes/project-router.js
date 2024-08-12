@@ -4,7 +4,8 @@ import verifyToken from "../middleware/verifyToken.js";
 
 const router = Router();
 
-// GET REQUEST : FOR PROJECT
+
+// GET REQUEST : FOR PROJECTS
 router.get(`/`, async (req, res) => {
   try {
     const data = await Project.find({});
@@ -16,7 +17,7 @@ router.get(`/`, async (req, res) => {
 });
 
 
-// GET REQUEST FOR A SINGLE PROJECT
+// GET REQUEST : FOR A SINGLE PROJECT
 router.get(`/:projectId`, (req, res) => {
   const id = req.params.projectId;
   Project.findById(id)
@@ -43,6 +44,5 @@ router.post(`/upload`, verifyToken, async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
 export default router;

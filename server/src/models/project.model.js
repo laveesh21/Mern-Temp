@@ -1,8 +1,7 @@
 import { mongoose, Schema } from "mongoose";
-
 const projectSchema = new Schema({
   title: { type: String, required: true },
-  developer: { type: Schema.Types.ObjectId, ref: 'User' },
+  developer: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   about: { type: String },
   imageList: { type: [String] },
   tags: { type: [String] },
