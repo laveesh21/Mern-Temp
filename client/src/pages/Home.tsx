@@ -5,24 +5,7 @@ import NotFound from "../components/NotFound";
 import Categories from "../components/Categories";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
-interface ProjectData {
-  _id: number;
-  title: string;
-  developer: string;
-  about: string;
-  desc: string;
-  imageList: string[];
-  tags: string[];
-  date: string;
-  likes: string;
-  dislikes: string;
-  status?: string;
-  releaseDate?: string;
-  techStack?: string[];
-  thumbnail: string;
-}
-
+import { ProjectData } from "../types/Project.types";
 
 
 

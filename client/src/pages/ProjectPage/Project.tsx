@@ -1,12 +1,32 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { dataSet } from "../tempData";
+import React, { useEffect, useState } from "react";
 import ImageCarousel from "../../components/Project/ImageCarousel";
+import { ProjectData } from "../../types/Project.types";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+
 
 const Project: React.FC = () => {
-  const { id } = useParams();
 
-  const project = dataSet.find((p) => p.id === parseInt(id));
+  const domain = import.meta.env.VITE_REACT_APP_DOMAIN as string;
+  const [project, setProject] = useState<ProjectData | null>(null);
+  const { projectId } = useParams<{ projectId: string }>();
+  const date = new Date(project?.createdAt)
+  const formattedDate = date.toLocaleDateString();
+
+
+  useEffect(() => {
+    const fetchProjectDetails = async () => {
+      try {
+        const response = await axios.get(`${domain}/project/${projectId}`);
+        setProject(response.data);
+      } catch (error) {
+        console.error('Error fetching project details:', error);
+      }
+    };
+
+    fetchProjectDetails();
+  }, [projectId]);
+
 
   if (!project) {
     return <div>Project not found</div>;
@@ -18,12 +38,9 @@ const Project: React.FC = () => {
       <div className="mt-16 w-auto h-auto">
         {/* PROJECT CONTAINER */}
         <div className="h-auto w-auto">
-          <h1 className="p-2 w-full h-auto mb-2 text-3xl">{project.name}</h1>
-
+          <h1 className="p-2 w-full h-auto mb-2 text-3xl">{project.title}</h1>
 
           <div className="w-auto h-auto flex">
-
-
 
 
             {/* Left: Image Carousel */}
@@ -38,7 +55,7 @@ const Project: React.FC = () => {
               <img
                 src={project.thumbnail || project.imageList[0]}
                 className="mb-4"
-                alt={project.name}
+                alt={project.title}
               ></img>
 
               <p className="text-sm text-gray-200 mb-2">{project.about}</p>
@@ -46,19 +63,19 @@ const Project: React.FC = () => {
               <div className="w-full h-auto py-2 text-sm text-gray-400 gap-1">
                 <div className="flex gap-2">
                   <p>Title: </p>
-                  <p className="">{project.name}</p>
+                  <p className="">{project.title}</p>
                 </div>
-                <div className="flex mb-2 ">
+                <div className="flex gap-2 mb-1 ">
                   <p>Status: </p>
                   <p className="">{project.status}</p>
                 </div>
                 <div className="flex gap-2">
                   <p>Developer: </p>
-                  <p className="">{project.dev}</p>
+                  <p className="">{project.developer.username}</p>
                 </div>
                 <div className="flex gap-2">
                   <p>Release Date: </p>
-                  <p className="">{project.releaseDate}</p>
+                  <p className="">{formattedDate}</p>
                 </div>
               </div>
 
@@ -78,11 +95,6 @@ const Project: React.FC = () => {
               </div>
 
 
-
-
-
-
-
             </div>
           </div>
         </div>
@@ -96,6 +108,7 @@ const Project: React.FC = () => {
           <button className="hover:bg-green-600 hover:text-white bg-gray-600 border-gray-200 hover:border-none text-lg font-semibold h-2/3 px-4 rounded-sm text-gray-300">
             Bookmark
           </button>
+
         </div>
 
 
@@ -110,9 +123,9 @@ const Project: React.FC = () => {
           {/* Project Desc Container */}
           <div className="w-176 flex flex-col gap-2">
             <h1 className="text-2xl bg-gray-900  font-semibold p-3">
-              {project.name}
+              {project.title}
             </h1>
-            <p className="p-3 bg-gray-900 ">{project.desc}</p>
+            <p className="p-3 bg-gray-900 ">{project.about}</p>
           </div>
 
           {/* Right Miscellaneous Bar */}
@@ -120,7 +133,7 @@ const Project: React.FC = () => {
             <div className="p-3 bg-gray-900 flex flex-col items-start">
               <h2 className="p-1">Tech Stack</h2>
               <div className="p-2 flex flex-wrap gap-3 max-w-80 items-center">
-                {project.techStack.map((tech, index) => (
+                {project.tags.map((tech, index) => (
                   <button
                     key={index}
                     className="border border-green-600 text-green-500 text-sm px-2 py-1"

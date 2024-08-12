@@ -1,7 +1,9 @@
+import { User } from "./User.types";
+
 export interface ProjectData {
   _id: number;
   title: string;
-  developer: string;
+  developer: User;
   about: string;
   desc: string;
   imageList: string[];
@@ -13,5 +15,7 @@ export interface ProjectData {
   releaseDate?: string;
   techStack?: string[];
   thumbnail: string;
+  createdAt: any;
+  updatedAt: any;
 }
 
