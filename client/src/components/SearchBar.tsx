@@ -3,7 +3,6 @@ import React, { ChangeEvent } from 'react'
 
 interface SearchBarProps {
   searchTerm: string;
-
   onSearch: (term: string) => void
 }
 

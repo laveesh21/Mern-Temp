@@ -25,7 +25,7 @@ const Profile: React.FC = () => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center gap-5">
-      <div className="w-1/2 bg-gray-900 flex justify-center mt-5">
+      <div className="w-[960px] bg-gray-900 flex justify-center mt-5">
         <div className=" text-white text-2xl"></div>
         <Link
           to={`/profile/${user._id}`}
@@ -43,7 +43,7 @@ const Profile: React.FC = () => {
         </Link>
       </div>
 
-      <div className="w-1/2 h-96">
+      <div className="w-[960px] h-auto mb-20">
         <Routes>
           <Route path={`/:id`} element={<ProfileCard userData={user} />} />
           <Route path={`/:id/projects`} element={<UserProject />} />

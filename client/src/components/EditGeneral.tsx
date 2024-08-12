@@ -6,7 +6,7 @@ const EditGeneral: React.FC = () => {
   const domain = import.meta.env.VITE_REACT_APP_DOMAIN as string;
 
   const [username, setUsername] = useState<string>("");
-  const [fullName, setFullName] = useState<string>("");
+  const [fullname, setFullName] = useState<string>("");
   const [summary, setSummary] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -15,12 +15,11 @@ const EditGeneral: React.FC = () => {
 
     const updatedUser = {
       username,
-      fullName,
+      fullname,
       summary,
     };
 
     try {
-      console.log("try")
       const response = await axios.patch(
         `${domain}/profile/update`,
         updatedUser,
@@ -68,7 +67,7 @@ const EditGeneral: React.FC = () => {
             type="text"
             className="w-full h-10 bg-zinc-800 px-4 py-2"
             placeholder="Enter your full name"
-            value={fullName}
+            value={fullname}
             onChange={(e) => setFullName(e.target.value)}
           />
         </div>

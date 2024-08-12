@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 export interface ProjectData {
   _id: number;
-  name: string;
+  title: string;
   developer: string;
   about: string;
   desc: string;
@@ -54,7 +54,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
   };
 
   return (
-    <div className="border border-gray-400 w-96 relative rounded-sm">
+    <div className="border border-gray-400 w-96 relative rounded-sm bg-zinc-950">
       {/* DEVELOPER */}
       <div className="p-2 px-4 flex justify-between items-center">
         <p className="font-extrabold text-gray-200">{developerName}</p>
@@ -72,7 +72,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
 
       {/* PROJECT DETAILS */}
       <div className="p-2">
-        <p className="text-emerald-50">{data.name}</p> {/* NAME */}
+        <p className="text-emerald-50">{data.title}</p> {/* NAME */}
         <div className="line-clamp-3">
           <p className="text-sm h-16 text-gray-400">{data.about}</p> {/* ABOUT */}
         </div>
