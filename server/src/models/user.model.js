@@ -32,6 +32,11 @@ const userSchema = new Schema(
       required: [true, "Password is required"],
     },
 
+    bookmark: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: 'Project'
+    },
+
     fullname: {
       type: String,
     },

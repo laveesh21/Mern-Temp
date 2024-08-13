@@ -20,8 +20,6 @@ router.get(`/`, async (req, res) => {
 // GET REQUEST : FOR A SINGLE PROJECT
 router.get('/:projectId', (req, res) => {
   const id = req.params.projectId;
-  console.log("ID: ", id);
-
   Project.findById(id)
     .populate('developer', 'username') // Populate the developer field with the username
     .then((data) => {
@@ -47,4 +45,15 @@ router.post(`/upload`, verifyToken, async (req, res) => {
   }
 });
 
+
+//  PATCH REQUEST TO EDIT PROJECT DETAILS 
+router.patch('/:projectId', verifyToken, (req, res) => {
+
+  const userId = req.user._id
+
+  console.log("USER ID", userId)
+
+})
+
 export default router;
+
