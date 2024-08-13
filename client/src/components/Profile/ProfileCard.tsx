@@ -10,6 +10,13 @@ interface ProfileCardProps {
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ userData }) => {
   const user: User = userData
+
+  const handleLogOut = () => {
+    localStorage.removeItem('token')
+    localStorage.setItem('isAuthenticated', 'false')
+    window.location.href = "/";
+  }
+
   return (
     <div className=" flex items-start justify-between gap-8 p-6 px-10 bg-gray-900 text-white rounded-lg shadow-lg auto">
       {/* Leftmost section with image */}
@@ -39,6 +46,11 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ userData }) => {
             Edit Profile
           </div>
         </Link>
+        <button
+          className="px-4 py-1 bg-gray-700 text-white text-lg font-semibold rounded-sm hover:bg-green-600"
+          onClick={handleLogOut}>
+          Log Out
+        </button>
       </div>
     </div>
   );

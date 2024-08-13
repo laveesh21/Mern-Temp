@@ -19,7 +19,7 @@ const LogIn: React.FC = () => {
       if (response.status === 200) {
         const token = response.data.token;
         localStorage.setItem("token", token);
-        localStorage.setItem("isAuthenticated", "true");
+        localStorage.setItem("isAuthenticated", true);
         window.location.href = "/";
       }
     } catch (error) {

@@ -124,7 +124,7 @@ const ProjectUpload: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center h-screen bg-zinc-950" >
-      < div className="rounded-lg bg-zinc-800 w-1/2 p-10" >
+      < div className="rounded-lg bg-zinc-800 w-1/2 min-w-[500px] p-10" >
         <h1 className="text-2xl font-extrabold text-white text-center">Upload</h1>
         <form onSubmit={handleSubmit}>
 

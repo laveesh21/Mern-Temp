@@ -8,15 +8,26 @@ const Navbar: React.FC = () => {
 
   const domain = import.meta.env.VITE_REACT_APP_DOMAIN as string;
   const [user, setUser] = useState<User>({} as User)
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      axios.get(`${domain}/profile/user`, { headers: { 'Authorization': `Bearer ${token}` } })
-        .then(response => setUser(response.data))
-        .catch(error => console.error("ERROR AXIOS: ", error))
+
+    const authStatus = localStorage.getItem("isAuthenticated");
+    if (authStatus === "true") {
+      setIsAuthenticated(true);
+      const token = localStorage.getItem("token");
+      if (token) {
+        axios.get(`${domain}/profile/user`, { headers: { 'Authorization': `Bearer ${token}` } })
+          .then(response => setUser(response.data))
+          .catch(error => console.error("ERROR AXIOS: ", error));
+      }
+    } else {
+      setIsAuthenticated(false);
     }
-  }, []);
+  }
+    , []);
+
+
 
   return (
     <div className="w-full h-12 bg-zinc-950 flex justify-between items-center p-4 border-b border-gray-700">
@@ -41,16 +52,19 @@ const Navbar: React.FC = () => {
       </ul>
 
       <div className="flex gap-3" id="profile">
-        <Link to={`/profile/${user._id}`}>
-          <div className="text-white hover:text-green-500 transition duration-300">
-            Profile
-          </div>
-        </Link>
-        <Link to="/auth/log_in">
-          <div className="text-white hover:text-green-500 transition duration-300">
-            Login
-          </div>
-        </Link>
+        {isAuthenticated ? (
+          <Link to={`/profile/${user._id}`}>
+            <div className="text-white hover:text-green-500 transition duration-300">
+              Profile
+            </div>
+          </Link>
+        ) : (
+          <Link to="/auth/log_in">
+            <div className="text-white hover:text-green-500 transition duration-300">
+              Login
+            </div>
+          </Link>
+        )}
       </div>
       {/* <div className=''> */}
       {/**/}

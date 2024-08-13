@@ -43,6 +43,7 @@ const Profile: React.FC = () => {
         >
           Projects
         </Link>
+
       </div>
 
       <div className="w-[960px] h-auto mb-20">
@@ -52,6 +53,9 @@ const Profile: React.FC = () => {
         </Routes>
       </div>
     </div>
+
+
+
   );
 };
 

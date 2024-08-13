@@ -10,6 +10,7 @@ import Footer from './components/Layout/Footer';
 import LogIn from './pages/Auth/Login';
 import SignUp from './pages/Auth/Signup';
 import EditProfile from './pages/ProfilePage/EditProfile';
+import EditProject from './pages/ProjectPage/EditProject';
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
             <Route path="/auth/log_in" element={<LogIn />} />
             <Route path="/auth/sign_up" element={<SignUp />} />
             <Route path="/project/upload" element={<ProjectUpload />} />
-
+            <Route path="/project/:projectId/edit" element={<EditProject />} />
           </Routes>
         </main>
         <Footer />

@@ -6,6 +6,7 @@ import Categories from "../components/Categories";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { ProjectData } from "../types/Project.types";
+import Loading from "../components/Loading";
 
 
 
@@ -81,24 +82,23 @@ function Home() {
 
       {/* Right Side: Project Cards */}
       <div className="w-3/4 pt-10 border-l border-l-gray-700 flex justify-center bg-zinc-950">
-
-        {/* LODING SCREEN NEED TO BE MADE */}
-        {loading && <div>Loading ...</div>}
-
-
-        <div className="flex w-11/12 flex-wrap justify-evenly items-center gap-8">
-
-          {filteredData.length != 0 ?
-            filteredData.map((data, index) => (
-              <Link to={`/project/${data._id}`} key={index} >
-                <ProjectCard data={data} />
-              </Link>
-            ))
-            : <div className=""><NotFound /></div>}
-
-        </div>
+        {/* Conditional Rendering */}
+        {loading ? (
+          <Loading />  // Show Loading while data is being fetched
+        ) : (
+          <div className="flex w-11/12 flex-wrap justify-evenly items-center gap-8">
+            {filteredData.length > 0 ? (
+              filteredData.map((data, index) => (
+                <Link to={`/project/${data._id}`} key={index}>
+                  <ProjectCard data={data} />
+                </Link>
+              ))
+            ) : (
+              <NotFound />  // Show NotFound if no projects are found
+            )}
+          </div>
+        )}
       </div>
-
 
     </div >
   );

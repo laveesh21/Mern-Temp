@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ImageCarousel from "../../components/Project/ImageCarousel";
 import { ProjectData } from "../../types/Project.types";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const Project: React.FC = () => {
@@ -12,6 +12,7 @@ const Project: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const date = new Date(project?.createdAt)
   const formattedDate = date.toLocaleDateString();
+  const navigate = useNavigate()
 
 
   useEffect(() => {
@@ -32,10 +33,15 @@ const Project: React.FC = () => {
     return <div>Project not found</div>;
   }
 
+  const handleEditButtonClick = () => {
+    navigate(`/project/${projectId}/edit`)
+  }
+
   const rating = 70;
   return (
     <div className="mb-96 flex flex-col items-center justify-center bg-zinc-950">
       <div className="mt-16 w-auto h-auto">
+
         {/* PROJECT CONTAINER */}
         <div className="h-auto w-auto">
           <h1 className="p-2 w-full h-auto mb-2 text-3xl">{project.title}</h1>
@@ -47,7 +53,6 @@ const Project: React.FC = () => {
             <div className="w-176 h-auto">
               <ImageCarousel images={project.imageList}></ImageCarousel>
             </div>
-
 
 
             {/* Right: Project Details */}
@@ -102,6 +107,11 @@ const Project: React.FC = () => {
         {/* MIDDLE BAR CONTAINER */}
         <div className="my-5 px-5 w-auto h-14 bg-gray-900 flex justify-end items-center gap-4">
           <p></p>
+          <button className="hover:bg-green-600 hover:text-white bg-gray-600 border-gray-200 hover:border-none text-lg font-semibold h-2/3 px-4 rounded-sm text-gray-300"
+            onClick={handleEditButtonClick}>
+            Edit Project
+          </button>
+
           <button className="hover:bg-green-600 hover:text-white bg-gray-600 hover:border-none text-lg font-semibold h-2/3 px-4 rounded-sm text-gray-300">
             Follow
           </button>
@@ -176,7 +186,7 @@ const Project: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
