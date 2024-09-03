@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ImageCarousel from "../../components/Project/ImageCarousel";
 import { ProjectData } from "../../types/Project.types";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 
 const Project: React.FC = () => {
@@ -12,7 +12,6 @@ const Project: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const date = new Date(project?.createdAt)
   const formattedDate = date.toLocaleDateString();
-  const navigate = useNavigate()
 
 
   useEffect(() => {
@@ -31,10 +30,6 @@ const Project: React.FC = () => {
 
   if (!project) {
     return <div>Project not found</div>;
-  }
-
-  const handleEditButtonClick = () => {
-    navigate(`/project/${projectId}/edit`)
   }
 
   const rating = 70;
@@ -107,10 +102,12 @@ const Project: React.FC = () => {
         {/* MIDDLE BAR CONTAINER */}
         <div className="my-5 px-5 w-auto h-14 bg-gray-900 flex justify-end items-center gap-4">
           <p></p>
-          <button className="hover:bg-green-600 hover:text-white bg-gray-600 border-gray-200 hover:border-none text-lg font-semibold h-2/3 px-4 rounded-sm text-gray-300"
-            onClick={handleEditButtonClick}>
-            Edit Project
-          </button>
+          <Link to={`/project/${projectId}/edit`}>
+            <button className="hover:bg-green-600 hover:text-white bg-gray-600 border-gray-200 hover:border-none text-lg font-semibold h-2/3 px-4 rounded-sm text-gray-300">
+              Edit Project
+            </button>
+          </Link>
+
 
           <button className="hover:bg-green-600 hover:text-white bg-gray-600 hover:border-none text-lg font-semibold h-2/3 px-4 rounded-sm text-gray-300">
             Follow

@@ -26,6 +26,7 @@ function App() {
             <Route path="/profile/*" element={<Profile />} />
             <Route path="/profile/:id/edit/*" element={<EditProfile />} />
             <Route path="/project/:projectId" element={<Project />} />
+            <Route path="/project/:projectId/edit" element={<EditProject/>} />
             <Route path="/auth/log_in" element={<LogIn />} />
             <Route path="/auth/sign_up" element={<SignUp />} />
             <Route path="/project/upload" element={<ProjectUpload />} />
