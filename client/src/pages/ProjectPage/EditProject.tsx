@@ -34,14 +34,26 @@ const EditProject: React.FC = () => {
 
 
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const form = e.currentTarget.form;
+      if (form) {
+        const elements = Array.from(form.elements) as HTMLInputElement[];
+        const index = elements.indexOf(e.currentTarget);
+        const nextElement = elements[index + 1] as HTMLInputElement;
+        if (nextElement) {
+          nextElement.focus();
+        }
+      }
+    }
+  }
+
+
+
   const handleSubmit = () => {
 
   }
-
-  const handleKeyDown = () => {
-
-  }
-
 
 
 
@@ -68,7 +80,6 @@ const EditProject: React.FC = () => {
           name="about"
           value={project.about}
           onChange={handleChange}
-          onKeyDown={handleKeyDown}
           required
         />
 

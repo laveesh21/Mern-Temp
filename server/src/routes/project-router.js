@@ -1,6 +1,7 @@
 import { Router } from "express";
 import Project from "../models/project.model.js";
 import verifyToken from "../middleware/verifyToken.js";
+import authProjectOwner from "../middleware/authProjectOwner.js";
 
 const router = Router();
 
@@ -47,11 +48,23 @@ router.post(`/upload`, verifyToken, async (req, res) => {
 
 
 //  PATCH REQUEST TO EDIT PROJECT DETAILS 
-router.patch('/:projectId', verifyToken, (req, res) => {
+router.patch('/:projectId', verifyToken, authProjectOwner, async (req, res) => {
+  const projectId = req.params.projectId
+  const newProjectData = req.body
 
-  const userId = req.user._id
+  try {
+    const updatedProject = await Project.findByIdAndUpdate(
+      projectId,
+      { $set: newProjectData },
+      { new: true, runValidators: true }
+    );
 
-  console.log("USER ID", userId)
+    if (!updatedProject) return res.status(404).json({ message: "Project not found" });
+    res.status(200).json(updatedProject);
+
+  } catch (error) {
+    res.status(500).json({ message: "Server Error" })
+  }
 
 })
 
