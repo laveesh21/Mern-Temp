@@ -10,7 +10,9 @@ import UserRouter from "./routes/user-router.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL
+}));
 app.use(bodyParser.json());
 
 
@@ -18,6 +20,7 @@ app.use(bodyParser.json());
 app.use("/project", ProjectRouter);
 app.use("/user", AuthenticatorRouter);
 app.use("/profile", UserRouter);
+
 
 
 // Server Listening on PORT
