@@ -17,5 +17,8 @@ export interface ProjectData {
   thumbnail: string;
   createdAt: any;
   updatedAt: any;
+  githubLink: string;
+  liveWebsiteLink: string;
+  youtubeTutorialLink: string;
 }
 

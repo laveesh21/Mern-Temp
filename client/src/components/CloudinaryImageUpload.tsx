@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { ColorRing } from 'react-loader-spinner';
 
@@ -6,37 +7,38 @@ interface CloudinaryImageProps {
   imageUrl: string | null;
 }
 
-
-
 const CloudinaryImageUpload: React.FC<CloudinaryImageProps> = (props) => {
 
-  const cloudinaryLink = "https://api.cloudinary.com/v1_1/djkjt3zgy/image/upload";
-  const cloudinaryDeleteLink = "https://api.cloudinary.com/v1_1/djkjt3zgy/image/destroy";
+  const cloudinaryUploadLink = import.meta.env.VITE_CLOUDINARY_UPLOAD_URL; // Ensure this environment variable is correctly set
+  const cloudinaryDeleteLink = import.meta.env.VITE_CLOUDINARY_DELETE_URL; // Ensure this environment variable is correctly set
 
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<Boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const uploadImage = async (file: File) => {
+    console.log("Logging", cloudinaryUploadLink)
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'waplgf2w');
+    formData.append('upload_preset', 'waplgf2w'); // Replace with your Cloudinary upload preset
 
     try {
-      const response = await fetch(cloudinaryLink, {
-        method: 'POST',
-        body: formData,
-      });
-
       setLoading(true);
       setError(null);
 
-      if (!response.ok) throw new Error('Network response was not ok.');
+      const response = await axios.post(cloudinaryUploadLink, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
-      const data = await response.json();
-      props.setImageUrl(data.secure_url);
+      if (response.status === 200) {
+        props.setImageUrl(response.data.secure_url);
+      } else {
+        throw new Error('Upload failed.');
+      }
     } catch (error) {
       setError('Failed to upload image. Please try again.');
-      console.log("ERROR while uploading image: " + error)
+      console.error("ERROR while uploading image: ", error);
     } finally {
       setLoading(false);
     }
@@ -44,7 +46,7 @@ const CloudinaryImageUpload: React.FC<CloudinaryImageProps> = (props) => {
 
   const deleteImage = async () => {
     if (!props.imageUrl) return;
-
+    console.log("DELETE FIRED")
     const publicId = props.imageUrl.split('/').pop()?.split('.')[0];
 
     if (!publicId) {
@@ -52,41 +54,33 @@ const CloudinaryImageUpload: React.FC<CloudinaryImageProps> = (props) => {
       return;
     }
 
-    console.log("Public ID: " + publicId)
-
     try {
       setLoading(true);
       setError(null);
 
-      const response = await fetch(cloudinaryDeleteLink, {
-        method: 'POST',
-        body: JSON.stringify({
-          public_id: publicId,
-          api_key: '595112789444384', // Replace with your Cloudinary API key
-        }),
+      console.log("delte axios")
+      const response = await axios.post(cloudinaryDeleteLink, {
+        public_id: publicId,
+        api_key: import.meta.env.VITE_CLOUDINARY_API_KEY, // Ensure this environment variable is correctly set
+      }, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
-      if (!response.ok) throw new Error('Network response was not ok.');
-
-      const data = await response.json();
-      if (data.result === 'ok') {
-        props.setImageUrl("");
+      if (response.data.result === 'ok') {
+        props.setImageUrl(''); // Set to null if no image URL
+        console.log("DELETED")
       } else {
         setError('Failed to delete image.');
       }
     } catch (error) {
       setError('Failed to delete image. Please try again.');
-      console.log("ERROR while deleting image: " + error);
+      console.error("ERROR while deleting image: ", error);
     } finally {
       setLoading(false);
     }
   };
-
-
-
 
   return (
     <div className='flex flex-col'>
@@ -100,39 +94,37 @@ const CloudinaryImageUpload: React.FC<CloudinaryImageProps> = (props) => {
         }}
       />
 
-
-
-
       {
         props.imageUrl ? (
           <div className='relative w-[200px] border flex'>
             <img className='border' src={props.imageUrl} alt="Uploaded image" height="120px" width="200px" />
             <button
-              className='absolute top-0 border font-sm right-0 bg-red-500 text-white px-2 py-px font-bold'
+              className='absolute top-0 right-0 bg-red-500 text-white px-2 py-px font-bold'
               onClick={deleteImage}
-            >x</button>
-            {loading && < div className='absolute h-[110px] w-[200px] flex items-center justify-center '> <ColorRing
-              visible={true}
-              height="79"
-              width="79"
-              ariaLabel="color-ring-loading"
-              wrapperStyle={{}}
-              wrapperClass="color-ring-wrapper"
-              colors={['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff']}
-            /></div>
-            }
-
+            >
+              x
+            </button>
+            {loading && (
+              <div className='absolute h-full w-full flex items-center justify-center z-10'>
+                <ColorRing
+                  visible={true}
+                  height="79"
+                  width="79"
+                  ariaLabel="color-ring-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="color-ring-wrapper"
+                  colors={['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff']}
+                />
+              </div>
+            )}
           </div>
-
         ) : (
           <div className='bg-zinc-900 p-4 h-32 text-center'>Upload Image Here</div>
         )
       }
-      {error && <div className='text-red-500 text-center sm'>{error}</div>}
-
-    </div >
+      {error && <div className='text-red-500 text-center'>{error}</div>}
+    </div>
   );
 }
 
 export default CloudinaryImageUpload;
-

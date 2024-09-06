@@ -65,9 +65,12 @@ const Project: React.FC = () => {
                   <p>Title: </p>
                   <p className="">{project.title}</p>
                 </div>
-                <div className="flex gap-2 mb-1 ">
+                <div className={`flex gap-2 mb-1`}>
                   <p>Status: </p>
-                  <p className="">{project.status}</p>
+                  <p className={`${project.status === 'Deprecated'
+                    ? 'text-red-500'
+                    : 'text-green-500'
+                    }`}>{project.status}</p>
                 </div>
                 <div className="flex gap-2">
                   <p>Developer: </p>
@@ -101,9 +104,11 @@ const Project: React.FC = () => {
 
         {/* MIDDLE BAR CONTAINER */}
         <div className="my-5 px-5 w-auto h-14 bg-gray-900 flex justify-end items-center gap-4">
+
           <p></p>
-          <Link to={`/project/${projectId}/edit`}>
-            <button className="hover:bg-green-600 hover:text-white bg-gray-600 border-gray-200 hover:border-none text-lg font-semibold h-2/3 px-4 rounded-sm text-gray-300">
+
+          <Link to={`/project/${projectId}/edit`} className="flex items-center hover:bg-green-600 hover:text-white bg-gray-600 hover:border-none text-lg font-semibold h-2/3 px-4 rounded-sm text-gray-300">
+            <button className="">
               Edit Project
             </button>
           </Link>
