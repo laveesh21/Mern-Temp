@@ -3,13 +3,15 @@ import ImageCarousel from "../../components/Project/ImageCarousel";
 import { ProjectData } from "../../types/Project.types";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-
+import { jwtDecode } from "jwt-decode";
+import { JwtPayload } from "../../types/JwtPayload.types.ts";
 
 const Project: React.FC = () => {
 
   const domain = import.meta.env.VITE_REACT_APP_DOMAIN as string;
   const [project, setProject] = useState<ProjectData | null>(null);
   const { projectId } = useParams<{ projectId: string }>();
+  const [userId, setUserId] = useState<string | null>(null);
   const date = new Date(project?.createdAt)
   const formattedDate = date.toLocaleDateString();
 
@@ -17,8 +19,15 @@ const Project: React.FC = () => {
   useEffect(() => {
     const fetchProjectDetails = async () => {
       try {
+        const token = localStorage.getItem("token");
         const response = await axios.get(`${domain}/project/${projectId}`);
         setProject(response.data);
+        if (!token) {
+          console.error('No token found');
+          return null;
+        }
+        const decodedToken = jwtDecode<JwtPayload>(token);
+        setUserId(decodedToken._id)
       } catch (error) {
         console.error('Error fetching project details:', error);
       }
@@ -107,11 +116,15 @@ const Project: React.FC = () => {
 
           <p></p>
 
-          <Link to={`/project/${projectId}/edit`} className="flex items-center hover:bg-green-600 hover:text-white bg-gray-600 hover:border-none text-lg font-semibold h-2/3 px-4 rounded-sm text-gray-300">
-            <button className="">
-              Edit Project
-            </button>
-          </Link>
+          {project.developer?._id?.toString() === userId && (
+            <Link
+              to={`/project/${projectId}/edit`}
+              className="flex items-center hover:bg-green-600 hover:text-white bg-gray-600 hover:border-none text-lg font-semibold h-2/3 px-4 rounded-sm text-gray-300"
+            >
+              <button>Edit Project</button>
+            </Link>
+          )}
+
 
 
           <button className="hover:bg-green-600 hover:text-white bg-gray-600 hover:border-none text-lg font-semibold h-2/3 px-4 rounded-sm text-gray-300">
@@ -162,7 +175,7 @@ const Project: React.FC = () => {
               <h2 className="p-1 ">Avilability</h2>
 
               <div className="p-2 flex flex-wrap gap-3 max-w-80 items-center">
-                <a href="google.com" className="w-full">
+                <a href={`${project.githubLink}`} className="w-full">
                   <div className="w-full h-full text-center bg-green-600 font-semibold flex items-center justify-center text-white">
                     Source Code
                   </div>
@@ -170,7 +183,7 @@ const Project: React.FC = () => {
               </div>
 
               <div className="p-2 flex flex-wrap gap-3 max-w-80 items-center">
-                <a href="google.com" className="w-full">
+                <a href={`${project.liveWebsiteLink}`} className="w-full">
                   <div className="w-full h-full text-center bg-blue-600 font-semibold flex items-center justify-center text-white">
                     Go Live
                   </div>
@@ -178,7 +191,7 @@ const Project: React.FC = () => {
               </div>
 
               <div className="p-2 flex flex-wrap gap-3 max-w-80 items-center">
-                <a href="google.com" className="w-full">
+                <a href={`${project.youtubeTutorialLink}`} className="w-full">
                   <div className="w-full h-full text-center bg-red-600 font-semibold flex items-center justify-center text-white">
                     Tutorial
                   </div>

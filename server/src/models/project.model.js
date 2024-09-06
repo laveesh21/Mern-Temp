@@ -8,6 +8,7 @@ const projectSchema = new Schema({
   techStack: { type: [String] },
   likes: { type: Number, default: 0 },
   dislikes: { type: Number, default: 0 },
+
   status: {
     type: String,
     enum: ['In-Development', 'Active', 'Deprecated'],
@@ -15,6 +16,9 @@ const projectSchema = new Schema({
   },
   thumbnail: { type: String, },
   description: { type: String, },
+  githubLink: { type: String },
+  liveWebsiteLink: { type: String },
+  youtubeTutorialLink: { type: String },
 }, { timestamps: true });
 
 const Project = mongoose.model("Project", projectSchema);
